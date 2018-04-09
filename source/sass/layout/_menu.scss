@@ -1,0 +1,149 @@
+.header-section{
+    .btn-cta{
+        min-width: 153px;
+        height: 46px;
+        font-size: $sm-fontsize; 
+    }
+    .logo-wrapper{
+        margin-top:10px;
+        width: 118px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+}
+
+/*-----------------------------------------
+ 2. navbar-collapse - bootstrap4
+------------------------------------------*/
+.main-nav {
+    ul{
+        list-style: none;
+        padding: 0;
+        li{ position: relative; }
+    }
+    > ul{
+        > li{
+            float: left;
+            > a{
+                padding: 0 10px;
+                font-size: 12px; line-height: $header-h;
+                font-weight: bold;
+                color: $darken-color;
+                text-transform: uppercase;
+                
+                &.active, &:hover {
+                    color: $darken-color!important;
+                    background-color: transparent!important;
+                    span:before{
+                        @include opacity(1);
+                    }
+                }
+            }
+            span{
+                position: relative;
+                &:before{
+                    content: "";
+                    @include opacity(0);
+                    position: absolute; top: 100%; left: 0;
+                    width: 100%; height: 2px;
+                    margin-top: 5px;
+                    background-color: $highlight-color;
+                }
+            }
+        }
+    }
+}
+
+/*-----------------------------------------
+ 3. navbar-toggler
+------------------------------------------*/
+.menu-icon{
+    float: right;
+    width: 40px; height: 40px;
+    overflow: hidden;
+}
+.navbar-toggler{
+    border: 0;
+    &[aria-expanded="true"] path#top,
+    &[aria-expanded="true"] path#bottom {
+        stroke-dashoffset: -650px;
+    }
+    &[aria-expanded="true"] path#middle {
+        stroke-dashoffset: -115px;
+        stroke-dasharray: 1px 220px;
+    }
+    &:focus {outline: 0;}
+    svg {
+        width: 80px;
+        margin: -15px 0 0 -25px; 
+        path {
+            fill: none;
+            transition: stroke-dashoffset 0.5s cubic-bezier(0.25, -0.25, 0.75, 1.25), stroke-dasharray 0.5s cubic-bezier(0.25, -0.25, 0.75, 1.25);
+            stroke-width: 30px;
+            stroke-linecap: round;
+            stroke: $grey;
+            stroke-dashoffset: 0px;
+        }
+        path#top, path#bottom {
+            stroke-dasharray: 240px 950px;
+        }
+        path#middle {
+            stroke-dasharray: 240px 240px;
+        }
+    }
+}
+
+
+
+@include media(sm){ 
+    .header-section{
+        position: fixed; top: 0; left: 0; right: 0; z-index: 99;
+        &.sticky{
+            @include box-shadow(0px 2px 5px rgba(0, 0, 0, .1));
+        }
+        
+        .pos-right{ float: right; }
+        .main-nav{
+            display: inline-block; 
+            vertical-align: middle;
+        }
+        .main-nav{margin-left: 30px;}
+    }
+    .midnightHeader{
+        .midnightInner{ padding: 22px 0; }
+        &.default{
+            background: rgba(255, 255, 255, .3);
+        }
+        &.dark{
+            background-color: rgba(0, 0, 0, .3);
+            .main-nav>ul>li>a,
+            .main-nav>ul>li>a.active, .main-nav>ul>li>a:hover{ color: $white!important;}
+        }
+    }
+    
+};
+
+@include media-only(xs){
+    .header-section.fixed-top{
+        position: relative;
+        padding: 10px 0;
+        .logo-wrapper{ margin-top: 10px; }
+    }
+    .main-nav{
+        position: absolute;  right: 0; top: 100%; z-index: 9;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        >ul{ display: block;
+            >li{
+                float: none;
+                display: block;
+                a{ color: $white; line-height: 40px;
+                    &:before{ display: none;}
+                    &.active{ color: $white!important; }
+                }
+            }
+        }
+        
+    }
+    
+}

@@ -1,0 +1,74 @@
+body(itemscope, itemtype="https://schema.org/WebPage")
+    header#header-section.menu-right(itemscope, itemtype="https://schema.org/WPHeader")
+        .header-main.container
+            nav.main-nav(itemscope, itemtype="https://schema.org/SiteNavigationElement")
+                ul
+                    li
+                        a(href="", itemprop="url")
+
+    // Begin team-section
+    section.team-section
+        .team-member(itemscope, itemtype="https://schema.org/Person")
+            .avatar-wrapper
+                img(src="", alt="", itemprop="image")
+                span.hidden(itemprop="url") http://www.behance.net/
+                a.icon-font(href="http://www.behance.net/", rel="v:url", aria-hidden="true", data-av_icon="")
+            .content-wrapper
+                h4.team-name(itemprop="name")
+                .team-position(itemprop="jobTitle")
+                .content-info(itemprop="description")
+                    p
+                span.hidden(itemprop="affiliation") Enfold Medical Demo
+
+
+    section.blog-section.bg-light
+        .container
+            .title-wrapper
+                h3.main-title(itemprop="headline")
+                .sub-title
+                    p
+            .row
+                .col-md-4
+        article.blog-post(itemscope, itemtype="https://schema.org/BlogPosting", itemprop="blogPost")
+            a.post-thumbnail(href="")
+                img(src="", alt="")
+                span.img-overlay
+                    i.icon
+            .post-content
+                h4.post-title
+                time.date-post(itemprop="datePublished", datetime="")
+                .post-des(itemprop="text")
+                    p
+                a.more-link(href="")
+
+            <span class="hidden">
+                <span class="av-structured-data" itemscope="itemscope" itemtype="https://schema.org/ImageObject" itemprop="image">
+                    <span itemprop="url">https://kriesi.at/themes/enfold-medical/files/2016/02/hospital.jpg</span>
+                    <span itemprop="height">641</span>
+                    <span itemprop="width">1000</span>
+                </span>
+                <span class="av-structured-data" itemprop="publisher" itemtype="https://schema.org/Organization" itemscope="itemscope">
+                    <span itemprop="name">Kriesi</span>
+                    <span itemprop="logo" itemscope="" itemtype="http://schema.org/ImageObject">
+                        <span itemprop="url">https://kriesi.at/themes/enfold-medical/files/2016/02/logo-2.png</span>
+                    </span>
+                </span>
+                <span class="av-structured-data" itemprop="author" itemscope="itemscope" itemtype="https://schema.org/Person">
+                    <span itemprop="name">Kriesi</span>
+                </span>
+                <span class="av-structured-data" itemprop="datePublished" datetime="2013-01-24T18:20:21+00:00">2015-02-12 18:49:48</span>
+                <span class="av-structured-data" itemprop="dateModified" itemtype="https://schema.org/dateModified">2015-02-12 18:49:48</span>
+                <span class="av-structured-data" itemprop="mainEntityOfPage" itemtype="https://schema.org/mainEntityOfPage">
+                    <span itemprop="name">Entry without preview image</span>
+                </span>
+            </span>
+
+    div(itemscope, itemtype="https://schema.org/CreativeWork")
+        div(itemprop="text")
+            p
+    footer.footer-section(itemscope, itemtype="https://schema.org/WPFooter")
+        .container
+            .row
+                .col-md-4.widget
+                    h3.widget-title
+                    .widget-content

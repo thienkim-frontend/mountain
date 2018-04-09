@@ -1,0 +1,14 @@
+
+// Start footer-section
+footer.footer-section
+    .container
+        .row
+            .col-6.col-md-4.order-md-1
+                span All rights reserved 2015
+            ul.col-12.order-first.order-md-2.social-icons.col.col-md-4
+                each icon in ['facebook', 'twitter', 'vk']
+                    li: a(href= "javascript:void(0);")
+                        i(class="icon-social-" + icon)
+            .col-6.col-sm-4.order-sm-3.footer-contact-number
+                a(href="") 1 234 243 123
+// End footer-section

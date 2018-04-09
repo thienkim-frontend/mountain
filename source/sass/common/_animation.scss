@@ -1,0 +1,136 @@
+@mixin animation-border-bottom{
+    .effect-style1{
+        display: inline-block;
+        position: relative;
+        &:before{
+            content: "";
+            visibility: hidden;
+            position: absolute; bottom: 0; left: 0;
+            width: 100%; height: 1px;
+            background-color: $grey;
+            @include transform(scaleX(0));
+            @include transition (all 0.3s ease-in-out 0s);
+        }
+        &:hover{
+            &:before{
+                visibility: visible;
+                @include transform (scaleX(1));
+            }
+        }
+    }
+}
+@mixin grayscale{
+    .effect-grayscale{
+        -webkit-filter: grayscale(100%);
+        -moz-filter: grayscale(100%);
+        -ms-filter: grayscale(100%);
+        -o-filter: grayscale(100%);
+        filter: grayscale(100%);
+        filter: gray;
+        transition: all 0.2s linear;
+        &:hover{
+            filter: none;
+            -webkit-filter: grayscale(0%);
+        }
+    }
+}
+@mixin zoon-out{
+    .zoom-out{
+        @include transition (all 0.3s ease-in-out 0s);
+        @include transform(scaleX(1));
+        &:hover{
+            transform: scale(1.02, 1.02);
+        }
+    }
+}
+@mixin effect-fadeIn{
+    .navbar-nav{
+        > li{
+          &:hover{
+            .sub-menu{
+              transform: translateY(0);
+              visibility: visible; opacity: 1;
+            }
+          }
+        }
+        .sub-menu{
+            width: 225px;
+            opacity: 0; visibility: hidden;
+            position: absolute; top: 100%; left: 20px; z-index: 999;
+            padding: 10px 0 10px 0;
+            background-color: $white;
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.09);
+            transform: translateY(25px);
+            transition: all 0.25s ease;
+            a{
+                padding: 5px 15px;
+                &:hover{
+                  color: $highlight-color;
+                }
+            }
+        }
+    }
+}
+
+@mixin effect-tooltip{
+    .tooltip-container{
+        position: relative;
+        &:before{
+          content:"";
+          opacity: 0;
+          position: absolute; top: -10px; left: -10px; z-index: 1;
+          display: block;
+          height: 60px; width: 60px;
+          background: $highlight-color;
+          border-radius: 100%;
+          animation: circle_pulsate 2s linear infinite;
+        }
+    }
+    @keyframes circle_pulsate {
+        0%    {transform: scale(0.4); opacity: 0;}
+        50%   {opacity: 0.7;}
+        100%  {transform: scale(1); opacity: 0;}
+    }
+}
+
+@mixin effect-text{
+    .nav{
+        > li {
+            &:hover, &.active {
+                span:before{ max-width: 100%; }
+            }
+            > a {
+                span{
+                position: relative;
+                display: inline-block;
+                white-space: nowrap;
+                @include transition(all 0.2s linear);
+                    &::before {
+                        content: attr(data-hover);
+                        position: absolute; top: 0; left: 0;
+                        max-width: 0; overflow: hidden;
+                        border-bottom: 1px solid $highlight-color;
+                        color: $highlight-color;                
+                        transition: max-width 0.5s;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@mixin hover-img{
+    .product-item{
+        position: relative;
+        img{
+            width: 100%; transition: all 300ms ease-out;
+        }
+        .img-hover{
+            opacity: 0;
+            position: absolute; left: 0; top: 0; right: 0; bottom: 0;
+        }
+        &:hover{
+            .img-hover{opacity: 1;}
+        }
+    }
+}

@@ -1,0 +1,327 @@
+//- 
+	 TABLE OF CONTENT
+ 1. wp-menu
+ 2. overview-section
+ 3. feature-section
+ 4. product-section
+ 5. discount-section
+ 6. bestseller-section
+ 7. newsletter-section
+ 8. blog-section
+
+
+//- table+
+	tr+
+	td[title="Hello world!" colspan=3]
+	dl+
+	ul>li.item$$@-*5
+	ul>li.item$@3*5
+	link:favicon  
+	link: touch 
+	link:css
+	script:src
+	@f+   (fontface)
+	@kf  (keyframe)   
+	trf:tx (transform: translateX(x);)
+
+
+mixin a(text, href)
+	- var href= (typeof(href) === 'undefined' || href =="")? "javascript:void(0);" : href;
+	a(href=href, title=text)&attributes(attributes)!= text
+//- ______________________________ 
+	1. MENU
+	______________________________
+mixin two-level-header
+	header#header-section.menu-right
+		.header-meta>(nav.sub-nav>ul>li*2>a)+.phone-info>span
+		.header-main.container>nav.main-nav>ul>li*2>a
+
+//- 1. ONE-LEVEL MENU
+	+menu([["My Account", "account.html", "active"], ["My Wishlist(3)", "account.html"]]).menu-list.center-xs
+mixin menu(arr)
+	ul&attributes(attributes).unstyled-list
+		- for (items in arr)
+			- var item = arr[items]
+			- if (!item[1])
+					- item[1] = "javascript:void(0);"
+			- if (item[2] == "active")
+				li.active
+					a(href=item[1] title=item[0])= item[0]
+			- else 
+				li
+					a(href=item[1] title=item[0])= item[0]
+
+//- 2. WP MENU
+	ul.wp-menu.menu-list-sm.clearfix.d-none.d-sm-block
+		+wp-menuItem("HOME", "#", "isActive")
+		+wp-subMenu("PORTFOLIO", "#", ["PORTFOLIO01", "PORTFOLIO01", "PORTFOLIO01"])
+
+mixin wp-menuItem(title, url, isActive)
+	- if (isActive)
+		li.menu-item.menu-item-type-post_type.menu-item-object-page.current-menu-item
+			 a(href=url title=title)= title
+	- else
+		li.menu-item.menu-item-type-post_type.menu-item-object-page
+			 a(href=url title=title)= title
+
+mixin wp-subMenu(title, url, arr)
+	li.menu-item.menu-item-type-post_type.menu-item-object-page.menu-item-has-children
+		a(href=url title=title)= title 
+		ul.sub-menu
+			each val in arr
+				li.menu-item.menu-item-type-post_type.menu-item-object-page
+					a(href="#")= val
+//- CART
+.shopping-cart-holder.cart-info-disabled
+	.cart-icon-wrapper
+		img(src="images/cart.svg", alt="")
+		i.cart-number 2
+	span.cart-total $.00
+	.shopping-cart-dropdown
+		ul
+			li.empty-cart No products in the cart.
+
+//- 3. BOOTSTRAP BREADCRUMB
+	+breadcrumb([["Home", "index.html"],["Blog", ""],["New collections", ""]], "Summer collections 2013")
+mixin breadcrumb(arr, lastitem)
+	// begin breadcrumb
+	ol.breadcrumb
+		- for (items in arr)
+			- var item = arr[items]
+			li
+				a(href=item[1], title=item[0])!=item[0]
+		li.active!=lastitem
+	// begin breadcrumb
+
+//- PAGINATION
+mixin pagination
+	// begin pagination
+	ul.likipe-pagination
+		li: span.page-numbers.current 1
+		li: a.page-numbers(href="#") 2
+		li: a.page-numbers(href="#") 3
+		li: a.next.page-numbers(href="#") →
+	// begin pagination
+
+//- 4. CAPTION CASOUSEL
+mixin fullwith-casousel(urlImgXs, urlImgLg, titleCaption, txtCaption)
+	// begin slider-item
+	li.likipe-slider-item
+		.thumnail-slider(style="background-image: url(images/" + urlImgLg+ ");")
+			img(srcset="images/" + urlImgXs + " 576w, images/" + urlImgLg +" 1920w", src="images/" + urlImgLg, alt="").d-block.d-lg-none
+		.caption-wrapper
+			.container
+				.caption-slider
+					h2(data-delay=".1s" data-animation="fadeInUp")!= titleCaption
+					p(data-delay=".2s" data-animation="fadeInUp")= txtCaption 
+					a(href="#").btn-cta(data-delay=".3s" data-animation="fadeInUp") Download
+	// end slider-item
+
+//- 4. SIMPLE CASOUSEL
+	+simple-carousel(["partner-01.png", "partner-01.png"])
+mixin simple-carousel(arr)
+	ul.slider-wrapper
+		each imgUrl in arr
+			a(href="#", target="_blank", title=""): img(src="images/" + imgUrl, alt="").img-responsive
+
+//- title block
+	.title-wrapper>h3.main-title+.sub-title>p
+mixin title-block(mainTitle, subTitle)
+	.title-wrapper&attributes(attributes)
+		h3.main-title!= mainTitle
+		.sub-title
+			p= subTitle
+
+//- 5. SOCIAL ICON
+	+social-icon(['twitter', 'linkedin', 'facebook', 'xing', 'rss'])
+mixin social-icon(arr)
+	.social-icon
+		each icon in arr
+			a(href= "javascript:void(0);")
+				i(class="fa fa-#{icon}")
+
+mixin featureItem()
+	//- section.feature-section>.feature-item>(.icon-wrapper>i.fa)+.feature-content>h3+(.feature-des>p)
+	section.feature-section
+		.feature-item
+			.icon-wrapper
+				i.fa
+			.feature-content
+				h3
+				.feature-des
+					p
+
+//- 6. POST BLOCK
+mixin postIem(title, date, imgUrl, content)
+	//- section.blog-section.bg-light>.container>h3+.row
+		article.col-md-4.blog-post
+		a.post-thumbnail>img+.img-overlay>i.icon^^
+		.post-content>h4.post-title+time.date-post[datetime=""]+(.post-des>p)+a.more-link
+		figure.effect-hover>img.img-responsive+figcaption>h5+p
+	// Begin post-item
+	article.post-item&attributes(attributes)
+		.thumbnail-wrapper
+			if (imgUrl = "")
+				img(src="http://placehold.it/240x220", alt="").img-responsive
+			img(src=imgUrl, alt="").img-responsive
+			.post-category JUNGLE SAFARIS
+			.overlay
+				.star-rating
+				.action-icons
+					a(href="#"): i.icon-favs
+					a(href="#"): i.icon-reply
+				.price from <br/>
+					del.old-price $799
+					span.discounted-price $599
+				a(href="#").btn.btn-default explore
+		.post-title
+			h3: a(href="#")= title
+			//- .post-meta
+				span.author= author
+				time.date-post(datetime="")= date
+		.post-des
+			p!= content
+		a.more-link(href="#") READ ARTICLE <i class="fa fa-long-arrow-right"></i>
+	// End post-item
+
+
+//- PRODUCT ITEM
+	+productItem("bermuda", "pro02_250x192.jpg", "$890", "isDiscount", "isOnSale")
+mixin productItem(name, url, price, order, discount, savePercent, removeicon)
+	// begin product-item
+	.product-item&attributes(attributes)
+		if (removeicon)
+			.remove-icon
+				i.iconfont-remove-sign
+		if (savePercent)
+			.sale-icon= savePercent
+		.thumbnail-wrapper
+			img(src='images/#{url}.jpg', alt='').img-responsive
+			.cta-btn-group
+				a.img-link(href='product_detail.html')
+				a(href='cart.html', title='Add to Cart'): i.fa.fa-shopping-cart.icon-01
+				a(href='my_account.html', title='Add to Wishlist'): i.fa.fa-heart
+				a(href='compare_product.html', title='Add to Comapre'): i.fa.fa-refresh
+					
+		.entry-main.clearfix
+			.rate-bar
+			.recent-order
+				span.order= order
+				span &nbsp;orders
+			h5.entry-title: a(href='#')= name
+			.short-desc
+				p
+			s.entry-discount= discount
+			| &nbsp;
+			.price
+				del: span= oldPrice
+				ins: span= price
+			if(block)
+				block
+	// end product-item
+
+//- TEAM ITEM
+mixin teamItem(imgUrl)
+	//- section.team-section>.team>(.avatar-wrapper>img+.team-info>.content-inner>p)+h4.team-name+p.team-position
+	article.col-md-4.col-sm-4.col-xs-12.team-item
+		.thumbnail-wrapper
+			img(src=imgUrl, alt="").img-responsive
+			.overlay
+				.social-icons
+					a(href="#", title="Facebook", target="_blank", rel="nofollow"): i.icon-facebook
+					a(href="#", title="Twitter", target="_blank", rel="nofollow"): i.icon-twitter
+					a(href="#", title="Google plus", target="_blank", rel="nofollow"): i.icon-google-plus
+		.caption-wrapper
+			h4.team-name Jason Stratham
+			span.team-positon TOURISM EXPERT
+	// End team Item
+
+//- VIDEO
+mixin video
+	.row.video-wrapper
+		.col-md-4
+			.embed-responsive.embed-responsive-16by9
+				iframe.embed-responsive-item(src="//player.vimeo.com/video/257450810", frameborder="0", webkitallowfullscreen="", mozallowfullscreen="", allowfullscreen="")
+
+//- testimonial Item 
+mixin testimonialItem(text, author)
+  .testimonial-item
+    .thumnail-holder
+      img(src="images/avatar.png", alt="").img-fluid
+    blockquote
+      p= text
+      footer!= '<i class="fa fa-user"></i>' + author
+
+//- newsletter frm
+mixin newsletter-frm
+	//- form:post 
+		input:email 
+		input:password  
+		input:file
+		input:reset
+		input:checkbox
+		input:radio
+		input:number
+		select+
+		a:link
+		a:mail 
+		a[href=#, title, target="_blank", rel="nofollow"]
+		a[href="tel:+01-562-867-5309" rel="nofollow"]
+	form#newsletter-frm(action="", name="", method="post", enctype="multipart/form-data")
+		.row
+			.col-lg-8.col-sm-9.col-7
+				input(type="text", placeholder="Enter your email address")
+			.col-lg-4.col-sm-3.col-5
+				button(type="submit").btn-cta subscribe <i class="fa fa-long-arrow-right"></i>
+
+
+mixin google-map
+	.row.map-wrapper
+	  .col-md-4.col-sm-4
+	    h3 Hitta Hit              
+	    address REDBERGSPLATSEN <br> Ånäsvägen 2                
+	    a(href="tel:031-190 920") 031-190 920
+	  .col-md-8.col-sm-8.map-content
+	    iframe(width="100%", height="458", frameborder="0", scrolling="no", marginheight="0", marginwidth="0", src="http://maps.google.se/maps?f=q&source=s_q&hl=sv&q=Nobelplatsen+2,+416+57+G%C3%B6teborg,+V%C3%A4stra+G%C3%B6talands+L%C3%A4n&aq=&sll=57.698218,11.981715&sspn=0.009311,0.033023&vpsrc=0&ie=UTF8&geocode=FeqkcAMd8zO3AA&split=0&hq=&hnear=Nobelplatsen+2,+416+57+G%C3%B6teborg,+V%C3%A4stra+G%C3%B6talands+L%C3%A4n&ll=57.713925,12.00664&spn=0.009307,0.033023&t=m&z=14&iwloc=near&output=embed")
+
+
+//- ______________________________ 
+	1. FOOTER
+	______________________________
+
+mixin footer
+	//- footer.footer-section>.container>.row>.col-md-4.widget>h3.widget-title+.widget-content
+		ul.content-list>li>a:mail>i.fa.fa-email+span{text}
+		a[href="tel:+01-562-867-5309" rel="nofollow"]
+		span.copyright{© Exline 2016}>a
+		ul.social-links>li*5>a[target="_blank"]>i.fa.fa-facebook
+		a#scroll-top-link[href="#", title="Scroll to top", aria-hidden="true"]>span.sr-only{Scroll to top}
+	// begin footer
+	footer.footer-section
+		.container
+			.row
+				.col-md-4.widget-wrapper
+					h3.widget-title
+					.widget-content
+						ul.content-list
+							li
+								a(href="mailto:")
+									i.fa.fa-envelope
+									span text
+							li
+								a(href="tel:", rel="nofollow")
+									i.fa.fa-phone
+									span text
+							li
+								address
+									i.fa.fa-map-marker
+									span text
+		span.copyright © Exline 2016
+			a(href="#") Likipe
+		ul.social-links
+			li
+				a(href="#", target="_blank"): i.fa.fa-facebook
+
+	a#scroll-top-link(href="javascript:void(0)", title="Scroll to top", aria-hidden="true")
+		span.sr-only Scroll to top
+	// end footer	

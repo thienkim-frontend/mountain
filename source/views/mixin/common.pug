@@ -1,0 +1,123 @@
+mixin titleSection(subTitle, mainTitle)
+  .title-wrapper
+    .sub-title.pos-top
+      p= subTitle
+    h3.main-title!= mainTitle
+
+//- casousel
+mixin fullwith-casousel(urlImgXs, urlImgLg, titleCaption, txtCaption)
+  .slider-item
+    .thumnail-slider(style="background-image: url(images/" + urlImgLg+ ");")
+      img(srcset="images/" + urlImgXs + " 576w, images/" + urlImgLg +" 1920w", src="images/" + urlImgLg, alt="")
+      
+    .content-inner.caption-wrapper
+      .line.container
+      .img-peson(style="background-image: url(images/slider-man.png);")
+      .caption-slider.container
+        .caption-inner
+          h2(data-delay=".1s" data-animation="fadeInUp")!= titleCaption
+          p(data-delay=".2s" data-animation="fadeInUp")= txtCaption
+          a(href="#").btn-cta(data-delay=".3s" data-animation="fadeInUp") ORDER NOW
+
+// +social-icon(['facebook', 'twitter', 'google-plus', 'linkedin', 'instagram'])
+mixin social-icon(arr)
+  ul.social-icon&attributes(attributes)
+    each icon in arr
+      li: a(href= "javascript:void(0);")
+        i(class="fa fa-" + icon)
+
+//- productItem
+mixin productItem(name, urlImage, price, isDiscount, isOnSale)
+  // begin product-item
+  .product-item.default-item&attributes(attributes)
+    .thumbnail-wrapper
+      img(data-src='images/' + urlImage , alt='').img-fluid.owl-lazy
+      .overlay-wrapper
+        .cta-btn-group
+          a(href="#", title="Wishlist").organic-btn: i.fa.fa-heart
+          a(href="#", title="Add to cart").organic-btn: i.fa.fa-shopping-basket
+          a(href="#", title="Zoom").organic-btn: i.fa.fa-expand
+        if (isOnSale)
+          .product-icons
+            span.new-lable New
+            span.sale-lable Sale
+        
+    .entry-main
+      h4.entry-title.text-truncate: a(href='#', title)!= name
+      .price
+        if (isDiscount)
+          del: span $65.00
+          ins: span= price
+        else
+          span= price
+      if(block)
+        block
+    
+  // end product-item
+
+mixin feature-item(imgUrl, title, text, isDiscount, price)
+  .feature-item
+    a(href="#", title=title)
+      .img-holder
+        img(src="images/" + imgUrl, alt="")
+        img(src="images/travel-05.png", alt="").img-hover
+      .feature-content
+        .rating-holder
+          .rating-icons.fa(title="Rated 4 out of 5")
+            span(style="width: 80%")
+        .feature-des
+          h3!= title
+          p!= text
+        .price
+          if (isDiscount)
+            del: span $3150
+            ins: span= price
+          else
+            span= price
+      if(block)
+        block
+
+
+
+
+mixin sliderItem(name, price, isDiscount)
+  // begin slider-item
+  a(href="#"): .product-item.img-left
+    .photo-wrapper
+      img(src="http://placehold.it/160x110" , alt='').img-fluid
+    .entry-main
+      h4.entry-title.text-truncate!= name
+      .separator
+      .price
+        if (isDiscount)
+          del: span $65
+          ins: span= price
+        else
+          span= price
+
+  // end slider-item
+
+mixin testimonialItem(img, text, author, job)
+  .testimonial-item
+    blockquote
+      p= text
+      footer 
+        .thumnail-holder
+          img(src="images/" + img, alt="").img-fluid
+        strong= author
+        span= job
+
+mixin journalItem(icon, category, imgUrl, title, text)
+  // begin blog-post
+  article.post-item&attributes(attributes)
+     a(href="#", title=title)
+      .photo-wrapper
+        img(src="images/" + imgUrl, alt="").img-fluid
+        i(class= icon)
+      .entry-main
+        h6.category= category
+        h4.post-title= title
+        .post-des
+          p= text
+  // end blog-post
+  

@@ -1,0 +1,108 @@
+$theme: likipe;
+$image: "../images";
+
+$logo-font: 'Bringin';
+$testimonial-font: 'Lora', serif;
+$title-font: 'Raleway', sans-serif; 
+$subTitle-font: "";
+$body-font: 'Open Sans', Arial, sans-serif;
+// $iconfont: fontawesome;
+$iconfont: 'icomoon';
+
+$base-fontsize: 1.2rem;
+$base-fontsize-lg: 1.6rem;
+$lg-fontsize: 1.6rem; // 36px
+$sm-fontsize: 1.2rem; // 12px
+$icon-lg: 3em;
+$icon-sm: 1.4rem;
+
+$base-color: #282828;
+$highlight-color: #36aeea;
+$light-color: #eaf1f4;
+$darken-color: #9daeb6 ;
+$middle-color: #f0f3f6;
+$placeholder-color: #f6f4f4;
+$error-color: #a12717;
+
+
+$white: #fff;
+$black: #000;
+$light-grey: #f6f4f4;
+$grey: #9f9f9f;
+$dark-grey: #333333;
+
+$header-h: 46px;
+$padding-lg: 60px;
+$padding-sm: 15px;
+$margin-lg: 60px;
+$margin-xs: 30px;
+
+
+// compass default
+$default-border-radius: 4px; 
+$default-animation-duration: 1s;
+$default-animation-timing-function: ease;
+
+// common placeholders
+// @extend %border-color;
+%margin-reset { margin: 0; }
+%padding-reset { padding: 0; }
+%size-reset { width: 100%; height: 100%; }
+
+
+%titleFont{ font-family: $title-font;}
+
+%color-grey{ color: $grey; }
+%border-grey{ border-color: $grey; }
+%bg-grey{ background-color: $grey; }
+
+%color-hightlight{ color: $highlight-color; }
+%border-hightlight{ border-color: $highlight-color; }
+%bg-hightlight{ background-color: $highlight-color; }
+
+
+%border-radius{ @include border-radius(30px); }
+%shadow{ @include box-shadow(0 0 5px rgba(0,0,0,0.2)); }
+%transition{ @include transition(all .1s ease); }
+%bg-img{
+    background-position: center;
+    background-repeat: no-repeat; 
+    background-size: cover;
+}
+
+@mixin icon-sprite($width:-125px, $icon-name...){
+    @each $name in $icon-name{
+        $i: index($icon-name, $name);
+        .icon-social-#{$name}{
+            background-position-x: $width * ($i - 1);
+        }
+    }
+}
+
+
+@include keyframes( 'fadeIn' ) {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+
+@mixin img-left($type: position) {
+    @if ($type == position) {
+            .img-wrapper{
+                position: absolute; left: 0; top:0;
+            }
+            .content-wrapper{
+                position: relative;
+                padding-left: 45px;
+            }
+    }
+   @else if ($type == float){
+        .img-wrapper{
+            float: left;
+        }
+        .content-inner{
+            padding-left: 10px;
+            overflow: hidden;
+        }
+   }
+}

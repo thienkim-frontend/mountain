@@ -1,0 +1,30 @@
+
+// Start header-section
+header.header-section.fixed-top
+  .container.clearfix
+    a.logo-wrapper(href="/", title="Logo Here")
+      img(src="images/logo.svg", alt="Logo Here").img-fluid
+    nav.likipe-nav.main-nav.collapse.navbar-collapse#navbarToggler
+      ul.nav.nav-pills
+        each val, index in ["our story", "services", "work", "journal", "contact"]
+          if (index === 0)
+            li 
+              a.nav-link.active(href="#" + val.replace(/\s+/g, '-').toLowerCase()): span= val
+          else
+            li 
+              a.nav-link(href="#" + val.replace(/\s+/g, '-').toLowerCase() ): span= val
+    .menu-icon.d-inline-block.d-md-none
+        button.navbar-toggler(type="button", data-toggle="collapse", data-target="#navbarToggler", aria-controls="navbarTogglerDemo03", aria-expanded="false", aria-label="Toggle navigation")
+          <svg viewBox="0 0 800 600">
+            <path id="top" d="M300,220 C300,220 520,220 540,220 C740,220 640,540 520,420 C440,340 300,200 300,200"></path>
+            <path id="middle" d="M300,320 L540,320"></path>
+            <path id="bottom" d="M300,210 C300,210 520,210 540,210 C740,210 640,530 520,410 C440,330 300,190 300,190" transform="translate(480, 320) scale(1, -1) translate(-480, -318) "></path>
+          </svg>
+    .pos-right.d-none.d-md-inline-block
+      button.btn-cta.btn-outline call us
+// End header-section
+
+
+
+
+

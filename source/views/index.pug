@@ -1,0 +1,155 @@
+//- extends layout to your side
+extends layout/layout
+
+block var
+  - subPage = "index";
+  - title = "Home page";
+block content
+
+  // Start hero-section
+  section.hero-section.full-screen#home
+    .owl-carousel.has-caption
+      +fullwith-casousel("slider-xs.jpg", "slider.jpg", "<span>TRAVEL WITH US</span> <strong>to the Mountains</strong>", "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incidid")
+  // End hero-section
+
+  // Start about-section
+  section#our-story.about-section.light-bg
+    .container
+      .row
+        .col-md-5.align-self-sm-center
+          .title-wrapper.has-top-line
+              h3.main-title ABOUT US
+          
+          p Aliquam sed posuere urna, et gravida nisl. Praesent interdum nisl libero, pretium egestas purus eleifend vitae. Mauris suscipit vel lectus at luctus.
+          button.btn-cta read more
+        .col-md-7.img-wrapper
+          img(src="images/about-01.jpg", alt="").big-img
+          img(src="images/about-02.jpg", alt="").small-img
+
+  // Start journal-section
+  section.journal-section#blog(data-midnight="dark")
+    .title-wrapper.text-center.has-top-line
+      h3.main-title our journal
+    .container
+      .post-wrapper.clearfix
+        +journalItem("icon-heart", "LOVE", "journal-01.jpg","Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do", "You know how to make best coffee in the universe? Or, maybe you’re very good in designing gloves? Tell everyone about your experience and skills.")
+        +journalItem("icon-drop", "WATER", "journal-02.jpg","LITTLE PIECES OF OUR PROUDNESS", "What do you do better than your competitors? What are you proud of? What details and advantages of your product you want people to know about?") 
+        +journalItem("icon-leaf", "tree", "journal-03.jpg","Lorem ipsum dolor sit amet, consectetur adipisicing elit,", "The way to a successful brand is hard, but always very interesting. Share the full story of your project – from the very first day until now.") 
+  // End blog-section
+
+
+  // Start newsletter-section
+  section.newsletter-section.light-bg
+    .container
+      .row
+        .col-lg-9.col-md-12
+          .title-wrapper.has-top-line
+              h3.main-title DO YOU WANNA GO?
+              p.sub-title Aliquam sed posuere urna, et gravida nisl. Praesent interdum nisl libero, pretium egestas purus eleifend vitae. Mauris suscipit vel lectus at luctus.
+
+          form#newsletter-frm(action="", name="")
+            .frm-wrapper.form-inline
+              .form-group.col-12.col-md-6
+                label.sr-only(for="user-name") Your name
+                input.form-control(type="text", placeholder="Your name:", id="user-name")
+              .form-group.col-12.col-md-6
+                label.sr-only(for="user-phone") Your phone
+                input.form-control(type="text", placeholder="Your phone:", id="user-phone")
+              button.btn.btn-cta Order now
+          .notice
+            i.icon-lock 
+            | * Your data will not be transferred
+  // End newsletter-section
+
+  // Start procedure-section
+  section#work.procedure-section(data-midnight="dark")
+    .content-inner
+      .container
+        .title-wrapper.has-top-line.text-center
+          h3.main-title HOW WE WORK
+        .content-wrapper.row
+          mixin procedureItem(step, icon, title, text)
+            .procedure-item.col-md-3
+              span.step-icon= step
+              .dashed-line
+              .icon-wrapper: i(class=icon)
+              .procedure-des
+                h4= title
+                p= text
+          +procedureItem("1", "icon-document", "Lorem ipsum dolor sit", "amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt")
+          +procedureItem("2", "icon-user", "Lorem ipsum dolor sit", "amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt")
+          +procedureItem("3", "icon-door", "Lorem ipsum dolor sit", " provident id officia minima reiciendis nihil corrupti quam a doloribus, dicta consectetur nisi. Veniam molestias neque, aut non rerum ad")
+          +procedureItem("4", "icon-done", "Lorem ipsum dolor sit", "amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt")
+  // End procedure-section
+
+  // Start feature-section
+  section#journal.feature-section(data-midnight="dark")
+    .content-inner
+      .container
+        .title-wrapper.has-top-line.text-center
+          h3.main-title TRAVEL WITH US
+        .feature-wrapper.owl-carousel(data-carousel='{"responsive" : { "0": {"items":2, "dots":true, "margin":15}, "767": {"items":3}, "992": {"items":5}}, "nav": true}')
+          +feature-item("travel-01.png", "Carpathian", "Lorem ipsum dolor si amet, consectetur adipisicing elit", "isDiscount", "$793")
+          +feature-item("travel-02.png", "Alps", "Lorem ipsum dolor si amet, consectetur", "", "$793")
+          +feature-item("travel-03.png", "Lorem ipsum dolor si amet", "Lorem ipsum dolor si amet, consectetur adipisicing elit", "isDiscount", "$793")
+          +feature-item("travel-04.png", "Pyrenees", "Lorem ipsum dolor si amet, consectetur adipisicing elit", "isDiscount", "$793")
+          +feature-item("travel-05.png", "United state", "Lorem ipsum dolor si amet", "", "$793")
+            
+  // End feature-section
+
+  // Start gallery-section
+  section.gallery-section(data-midnight="dark")
+    .content-inner
+      .container
+        .title-wrapper.has-top-line.text-center
+          h3.main-title gallery
+        .content-wrapper
+          .gallery-masonry
+            .grid-gutter
+            .grid-sizer
+            article.gallery-item: img(src="images/gallery-01.jpg", alt="")
+            article.gallery-item.span-4: img(src="images/gallery-03.jpg", alt="")
+            article.gallery-item.span-5: img(src="images/gallery-05.jpg", alt="")
+            
+            article.gallery-item.span-4: img(src="images/gallery-04.jpg", alt="")
+            article.gallery-item: img(src="images/gallery-02.jpg", alt="")
+            article.gallery-item.span-5: img(src="images/gallery-06.jpg", alt="")
+  // End gallery-section
+
+  section.partner-section.light-bg
+    .container
+      .partner-slider.owl-carousel(data-carousel='{"responsive" : { "0": {"items":3, "margin": 0}, "767": {"items":6}, "992": {"items":6}}, "nav": true}')
+        each item in ["logo-01", "logo-02", "logo-03", "logo-04", "logo-05", "logo-06", "logo-01", "logo-02"]
+          a(href="#"): img(src="images/" + item + ".png", alt="")
+
+  section.contact-section
+    .container
+      // Start testimonial-section
+      .testimonial-container
+        .title-wrapper.has-top-line.text-center
+            h3.main-title  our Clients say
+        .testimonial-slider.owl-carousel(data-carousel='{"responsive" : { "0": {"items":1, "dots":true}, "767": {"items":2}, "992": {"items":2}}, "nav": false}')
+          +testimonialItem("client-01.png", 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do  enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse ', "Pavliv Yaroslav", "Web designer")
+          +testimonialItem("client-02.png",'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do  enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse ', "John Scott", "The Fringe")
+          +testimonialItem("client-01.png", 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do  enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse ', "Pavliv Yaroslav", "Web designer")
+          +testimonialItem("client-02.png",'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do  enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse ', "John Scott", "The Fringe")
+      // End testimonial-section
+
+      #contact.contact-container
+        .title-wrapper.text-center
+          h3.main-title  CONTACTS
+          p Sign up for our newsletter to receive updates
+        .contact-frm-wrapper
+          form(action="", name="", id="contact-frm")
+            label.sr-only(for="user-name") Name
+            input#user-name.form-control(type="text", placeholder="Name")
+
+          label.sr-only(for="user-phone") Phone
+          input#user-phone.form-control(type="number", placeholder="Phone")
+          
+          label.sr-only(for="user-email") Email
+          input#user-email.form-control(type="email", placeholder="Email")
+          
+          button.btn.btn-cta(type="submit") Send
+
+   
